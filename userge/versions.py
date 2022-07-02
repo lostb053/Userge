@@ -29,6 +29,7 @@ def get_version() -> str:
 
 
 async def get_full_version() -> str:
+    core = await api.get_core()
     ver = f"{get_version()} Build {core.count}"
 
     return ver
