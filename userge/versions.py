@@ -9,7 +9,7 @@
 # All rights reserved.
 
 from sys import version_info
-
+from requests import get
 from pyrogram import __version__ as __pyro_version__  # noqa
 
 from loader import __version__ as __loader_version__  # noqa
@@ -29,7 +29,6 @@ def get_version() -> str:
 
 
 async def get_full_version() -> str:
-    core = await api.get_core()
-    ver = f"{get_version()}-build.{core.count}"
+    ver = f"{get_version()} Build {core.count}"
 
-    return ver + '@' + core.branch
+    return ver
