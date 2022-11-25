@@ -107,6 +107,7 @@ async def _raise_func(r_c: Union['_client.Userge', '_client.UsergeBot'],
     if r_m.chat.type in (enums.ChatType.PRIVATE, enums.ChatType.BOT):
         await r_m.reply(f"< **ERROR**: {text} ! >")
     else:
+        # skipcq: PYL-W0212
         await r_c._channel.log(f"{text}\nCaused By: [link]({r_m.link})", "ERROR")
 
 
@@ -347,7 +348,7 @@ class RawDecorator(RawClient):
                     await self._channel.log(f"**PLUGIN** : `{module}`\n"
                                             f"**FUNCTION** : `{func.__name__}`\n"
                                             f"**ERROR** : `{f_e or None}`\n"
-                                            f"\n```{format_exc().strip()}```",
+                                            f"```python\n{format_exc().strip()}```",
                                             "TRACEBACK")
                 finally:
                     if flt.propagate:
